@@ -1,6 +1,8 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
+
 {
     public float speed = 5f; // Speed of the player movement
     public float jumpForce = 5f; // Force applied when the player jumps
@@ -13,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerRigidbody.isKinematic = true;
+        Invoke(nameof(EnablePlayer), 5f);
+
         playerRigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the player
     }
 
@@ -45,4 +50,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+   
+    void EnablePlayer()
+    {
+        playerRigidbody.isKinematic = false;
+    }
 }
