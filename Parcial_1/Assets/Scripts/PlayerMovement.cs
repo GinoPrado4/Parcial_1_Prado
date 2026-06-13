@@ -2,38 +2,28 @@ using UnityEngine;
 using Unity.Netcode;
 
 public class PlayerMovement : NetworkBehaviour
-
 {
-    public float speed = 5f; // Speed of the player movement
-    public float jumpForce = 5f; // Force applied when the player jumps
-    public float horizontalInput; // Horizontal input from the player
-    public float verticalInput; // Vertical input from the player
-    private Rigidbody playerRigidbody; // Reference to the player's Rigidbody component
-    public bool isGrounded = true; // Flag to check if the player is on the ground
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float jumpForce = 5f;
 
+    private Rigidbody playerRigidbody;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private float horizontalInput;
+    private float verticalInput;
+
+    private bool isGrounded = false;
+
+    private void Start()
     {
-        playerRigidbody.isKinematic = true;
-        Invoke(nameof(EnablePlayer), 5f);
-
-        playerRigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the player
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //player input
+        if (!IsOwner) return;
+
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-
-        //movement
-
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
-        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
-
-        //jumping
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -42,17 +32,25 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (!IsOwner) return;
+
+        Vector3 movement =
+            (transform.forward * verticalInput +
+             transform.right * horizontalInput).normalized;
+
+        playerRigidbody.MovePosition(
+            playerRigidbody.position +
+            movement * speed * Time.fixedDeltaTime
+        );
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true; // Set isGrounded to true when the player collides with the ground
+            isGrounded = true;
         }
-    }
-
-   
-    void EnablePlayer()
-    {
-        playerRigidbody.isKinematic = false;
     }
 }

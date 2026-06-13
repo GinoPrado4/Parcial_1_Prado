@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 1861790322680857419}
   - component: {fileID: 2226335234987426399}
   - component: {fileID: -8341647847496175503}
-  - component: {fileID: -5789620102019976987}
   m_Layer: 0
   m_Name: PJ
   m_TagString: Untagged
@@ -143,7 +142,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!114 &8847663524937256692
 MonoBehaviour:
@@ -157,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1435590471
+  GlobalObjectIdHash: 3096354021
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -248,19 +247,3 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   speed: 5
   jumpForce: 5
-  horizontalInput: 0
-  verticalInput: 0
-  isGrounded: 1
---- !u!114 &-5789620102019976987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8197769754617439887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4882bad8959db404c87b5ab6b401af84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawn
-  ShowTopMostFoldoutHeaderGroup: 1
