@@ -139,7 +139,7 @@ public class MainMenu : MonoBehaviour
             return;
 
         NetworkManager.Singleton.SceneManager.LoadScene(
-            "SampleScene",
+            "GameplayScene",
             LoadSceneMode.Single
         );
     }
