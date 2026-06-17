@@ -211,4 +211,15 @@ public class MainMenu : MonoBehaviour
         return localIP;
     }
 
+    public void QuitGame()
+    {
+        if (NetworkManager.Singleton != null &&
+            NetworkManager.Singleton.IsListening)
+        {
+            NetworkManager.Singleton.Shutdown();
+        }
+
+        Application.Quit();
+    }
+
 }
